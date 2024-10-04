@@ -1,0 +1,45 @@
+@model blogapp.Models.Post;
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div class="bg-secondary bg-opacity-10 py-2">
+
+    <div class="container py-5">
+        <form method="post" asp-controller="Post" asp-action="update" asp-route-postId="@Model.Id">
+         <div class="mb-3">
+            <label class="form-label" asp-for="title">Title</label>
+            <input type="text" class="form-control" name="title" asp-for="title"  required />
+        </div>
+
+        <div class="mb-3">
+            <label class="form-label" asp-for="excerpt">Excerpt</label>
+            <input type="text" class="form-control" name="excerpt" asp-for="excerpt" required />
+        </div>
+
+        <div class="mb-3">
+            <label class="form-label" asp-for="content">Content</label>
+            <textarea class="form-control" name="content" rows="5" asp-for="content" required></textarea>
+        </div>
+
+        <div class="mb-3">
+            <label class="form-label" asp-for="author">Author</label>
+            <input type="text" class="form-control" name="author" asp-for="author" required />
+        </div>
+
+       <div class="mb-3">
+                    <label class="form-label" asp-for="tags">Tags (Comma separated)</label>
+                    <input type="text" class="form-control" asp-for="tags" 
+                           value="@string.Join(",", Model.tags.Select(t => t.name))" required />
+      </div>
+
+        <button type="submit" class="btn btn-primary">Update</button>
+
+
+        </form>
+    </div>
+</div>
+
+</body>

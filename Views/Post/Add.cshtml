@@ -1,0 +1,39 @@
+@model blogapp.Dto.PostDetailsDTO;
+
+<div class="bg-secondary bg-opacity-10 py-2">
+    <div class="container">
+        <h1>Add new Post</h1>
+    </div>
+
+    <div class="container py-5">
+        <form method="post">
+         <div class="mb-3">
+            <label class="form-label">Title</label>
+            <input type="text" class="form-control" name="title" asp-for="title"  required />
+        </div>
+
+        <div class="mb-3">
+            <label class="form-label">Excerpt</label>
+            <input type="text" class="form-control" name="excerpt" asp-for="excerpt" required />
+        </div>
+
+        <div class="mb-3">
+            <label class="form-label">Content</label>
+            <textarea class="form-control" name="content" rows="5" asp-for="content" required></textarea>
+        </div>
+
+        <div class="mb-3">
+            <label class="form-label">Author</label>
+            <input type="text" class="form-control" name="author" asp-for="author" required />
+        </div>
+        <div class="mb-3">
+            <label class="form-label">Tags(Comma seperated)</label>
+            <input type="text" class="form-control" name="tags" asp-for="tags" required />
+        </div>
+
+        <button type="submit" class="btn btn-primary">Submit</button>
+
+
+        </form>
+    </div>
+</div>

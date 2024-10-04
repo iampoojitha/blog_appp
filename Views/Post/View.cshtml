@@ -1,0 +1,70 @@
+@model blogapp.Models.Post;
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@Model.title</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+</head>
+<body>
+    <div class="container mt-4">
+        <div class="card text-center">
+            <div class="card-body">
+                <h5 class="card-title">@Model.title</h5>
+                <h6 class="card-subtitle mb-2 text-muted">By @Model.author</h6>
+                <p class="card-text">@Model.content</p>
+                <p class="card-text"><small class="text-muted">Published on: @Model.publishedAt.ToString("MMMM dd, yyyy")</small></p>
+                <p class="card-text">
+                  <small class="text-muted">Tags: 
+                    @if (Model.tags != null && Model.tags.Any())
+                    {
+                        for (int i = 0; i < Model.tags.Count; i++)
+                        {
+                            var tag = Model.tags.ElementAt(i);
+                            @tag.name @(i < Model.tags.Count - 1 ? ", " : "")
+                        }
+                    }
+                  </small>
+                </p>
+                <div class="d-flex justify-content-center">
+                    <a href="@Url.Action("List", "Post")" class="btn btn-primary">Go Back</a>
+                    <a asp-controller="Post" asp-action="edit" asp-route-postId="@Model.Id" class="btn btn-primary ms-1">Edit</a>
+                    <form asp-controller="Post" asp-action="Delete" asp-route-postId="@Model.Id" method="post" class="ms-2">
+                        <button type="submit" class="btn btn-danger">Delete</button>
+                    </form>
+                </div>
+                <div class="card-footer text-body-secondary">
+                    @Model.createdAt.ToString("MMMM dd, yyyy")
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <br>
+
+    <!-- Comment Section -->
+    <div class="container mt-4">
+        <h5>Add a Comment</h5>
+        <form>
+            <div class="mb-3">
+                <label class="form-label">Name</label>
+                <input type="text" class="form-control" id="commentName" required>
+            </div>
+            <div class="mb-3">
+                <label class="form-label">Email</label>
+                <input type="email" class="form-control" id="commentEmail" required>
+            </div>
+            <div class="mb-3">
+                <label class="form-label">Comment</label>
+                <textarea class="form-control" id="commentText" rows="3" required></textarea>
+            </div>
+            <button type="submit" class="btn btn-primary">Add Comment</button>
+        </form>
+    </div>
+    <br>
+    <br>
+</body>
+</html>
